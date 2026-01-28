@@ -49,7 +49,7 @@ bool RedisClient::connectToServer(){
     freeaddrinfo(res); // Free the address information
 
     if(sockfd == -1) { 
-        std:: cerr << "Could not connect to "<< host << " : " << port << "\n"; // Print failure messge
+        std:: cerr << "Could not connect to "<< host << ":" << port << "\n"; // Print failure messge
         return false;
     }
     return true; // Return true on successfull connections
@@ -60,4 +60,8 @@ void RedisClient::disconnect(){
         close(sockfd); // Close socket if connection failed
         sockfd = -1; // Reset socket file descriptor
     }
+}
+
+int RedisClient::getSocketFD() const{
+    return sockfd;
 }
