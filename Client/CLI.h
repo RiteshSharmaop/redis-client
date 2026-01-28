@@ -3,7 +3,9 @@
 
 
 #include<string>
+#include<vector>
 #include "RedisClient.h"
+#include "CommandHandler.h"
 
 // ....
 
