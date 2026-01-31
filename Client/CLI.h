@@ -6,13 +6,14 @@
 #include<vector>
 #include "RedisClient.h"
 #include "CommandHandler.h"
+#include "ResponseParser.h"
 
 // ....
 
 
 class CLI{
     public:
-        CLI(const std::string &host , int &port);
+        CLI(const std::string &host , int port);
         void run();
     private:
         RedisClient redisClient;

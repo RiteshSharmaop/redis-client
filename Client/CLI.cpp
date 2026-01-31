@@ -11,9 +11,9 @@ static std::string trim(const std::string &s){
 }
 
 
-CLI::CLI(const std::string &host , int &port) 
-    : redisClient(host , port){
-}
+CLI::CLI(const std::string &host, int port)
+    : redisClient(host, port) {}
+
 
 
 void CLI::run(){
@@ -25,6 +25,7 @@ void CLI::run(){
     std::string host = "127.0.0.1";
     int port = 6379;
 
+    
     while(true){
         std::cout << host << ":" << port << ">";
         std::cout.flush();
@@ -59,5 +60,8 @@ void CLI::run(){
         }
 
         // Parse and print response
+        std::string response = ResponseParser::parseResponse(redisClient.getSocketFD());
+        std::cout << response << "\n";
     }
+    redisClient.disconnect();
 }
