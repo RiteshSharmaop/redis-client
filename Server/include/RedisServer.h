@@ -7,6 +7,9 @@
 #include<sys/socket.h>
 #include<unistd.h>
 #include<netinet/in.h>
+#include<thread>
+#include<vector>
+#include<cstring>
 
 class RedisServer{
     public:
