@@ -7,6 +7,7 @@
 #include<unordered_map>
 #include<vector>
 #include<sstream>
+#include<chrono>
 
 
 class RedisDatabase{
@@ -17,7 +18,21 @@ class RedisDatabase{
         // Persistance: Dump / load the database from a file.
         bool dump(const std::string &filename);
         bool load(const std::string &filename);
-    
+
+        // Comman Commands
+        bool flushAll();
+
+        // Key/Value Operations
+        void set(const std::string &key , const std::string &value);
+        bool get(const std::string &key , const std::string &value);
+        std::vector<std::string> keys();
+        std::string type(const std::string &key);
+        bool del(const std::string &key);
+        // expire 
+        bool expire(const std::string &key , const std::string seconds);
+        // rename 
+        bool rename(const std::string &oldKey , const std::string newKey);
+
     private:
         RedisDatabase() = default;
         ~RedisDatabase() = default;
@@ -29,6 +44,9 @@ class RedisDatabase{
         std::unordered_map<std::string , std::string> kv_store;
         std::unordered_map<std::string , std::vector<std::string>> list_store;
         std::unordered_map<std::string , std::unordered_map<std::string , std::string>>  hash_store;
-};
+        
+        std::unordered_map<std::string , std::chrono::steady_clock::time_point> expiry_map;
+
+    };
 
 #endif // ends REDIS_DATABASE_H

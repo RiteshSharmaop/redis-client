@@ -12,6 +12,7 @@ int main(int argc , char* argv[]) {
     RedisServer server(port);
     
     // Background Persistence: dump the database every 300 seconds.  (5*60 save database)
+    // todo: try wot 10 second
     std::thread persistanceThread([](){
         while(true){
             std::this_thread::sleep_for(std::chrono::seconds(300));
